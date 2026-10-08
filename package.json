@@ -1,0 +1,44 @@
+{
+  "name": "asmc-support",
+  "displayName": "ASMC Support",
+  "publisher": "Orbinuity",
+  "version": "1.0.0",
+  "description": "Support the custom ASM Craft language.",
+  "icon": "assets/pack.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Orbinuity/asmc-support"
+  },
+  "engines": {
+    "vscode": "^1.134.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "asmc",
+      "aliases": ["Assembly Craft", "asmc"],
+      "extensions": [".asmc"],
+      "configuration": "./language-configuration.json",
+      "icon": {
+          "light": "./assets/asmc.svg",
+          "dark": "./assets/asmc.svg"
+        }
+    },
+    {
+      "id": "asmcx",
+      "aliases": ["Assembly Craft Compiled", "asmcx"],
+      "extensions": [".asmcx"],
+      "icon": {
+          "light": "./assets/asmcx.svg",
+          "dark": "./assets/asmcx.svg"
+      }
+    }],
+    "grammars": [{
+      "language": "asmc",
+      "scopeName": "source.asmc",
+      "path": "./syntaxes/asmc.tmLanguage.json"
+    }]
+  }
+}
