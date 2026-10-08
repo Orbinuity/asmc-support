@@ -1,0 +1,83 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Assembly Craft",
+    "scopeName": "source.asmc",
+    "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        { "include": "#numbers" },
+        { "include": "#section-data" },
+        { "include": "#section-text" }
+    ],
+    "repository": {
+        "comments": {
+            "name": "comment.line.semicolon.asmc",
+            "begin": ";",
+            "end": "$"
+        },
+        "section-data": {
+            "begin": "^\\s*(section\\s+\\.data)\\b",
+            "beginCaptures": {
+                "1": { "name": "keyword.control.section.asmc" }
+            },
+            "end": "(?=^\\s*section\\b)",
+            "patterns": [
+                { "include": "#comments" },
+                { "include": "#variable-declaration" },
+                { "include": "#strings" },
+                { "include": "#numbers" }
+            ]
+        },
+        "section-text": {
+            "begin": "^\\s*(section\\s+\\.text)\\b",
+            "beginCaptures": {
+                "1": { "name": "keyword.control.section.asmc" }
+            },
+            "end": "(?=^\\s*section\\b)",
+            "patterns": [
+                { "include": "#comments" },
+                { "include": "#strings" },
+                { "include": "#functions" },
+                { "include": "#registers" },
+                { "include": "#keywords" },
+                { "include": "#numbers" }
+            ]
+        },
+        "functions": {
+            "match": "^\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s*:",
+            "captures": {
+                "1": {
+                    "name": "entity.name.function.asmc"
+                }
+            }
+        },
+        "registers": {
+            "patterns": [{
+                "name": "variable.language.register.asmc",
+                "match": "\\b(rax|rbx|rcx|rdx|rsi|rdi|rbp|rsp|r[8-9]|r1[0-5])\\b"
+            }]
+        },
+        "keywords": {
+            "patterns": [{
+                "name": "keyword.control.asmc",
+                "match": "\\b(mov|push|pop|call|ret|cmp|jmp|je|jne|jg|jl|jge|jle|xor|add|sub|mul|div|syscall)\\b"
+            }]
+        },
+        "numbers": {
+            "name": "constant.numeric.asmc",
+            "match": "\\b(0[xX][0-9a-fA-F]+|0[bB][01]+|\\d+)\\b"
+        },
+        "strings": {
+            "name": "string.quoted.double.asmc",
+            "begin": "\"",
+            "end": "\""
+        },
+        "variable-declaration": {
+            "match": "^\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s+\\b(ds|dm|db)\\b",
+            "captures": {
+                "1": { "name": "variable.other.asmc" },
+                "2": { "name": "storage.type.asmc" }
+            }
+        }
+    }
+}
